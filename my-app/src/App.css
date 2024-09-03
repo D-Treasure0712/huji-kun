@@ -9,23 +9,24 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 5s linear;
   }
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #f5f5dc;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #2f4f4f;
+  position: relative; /* 相対位置を設定 */
 }
 
 .App-link {
-  color: #61dafb;
+  color: #8b0000;;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +36,45 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  font-family: 'Noto Serif JP', serif; /* 和風フォント */
+}
+
+button {
+  background-color: #b0a18f; /* 和風の落ち着いた色 */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #8c7b6b; /* ホバー時の色 */
+}
+
+a {
+  font-size: 24px;
+  font-weight: bold;
+  color: #8c7b6b; /* 和風の色合い */
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.settings-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #8c7b6b; /* 和風の色合い */
+  transition: color 0.3s;
+}
+
+.settings-button:hover {
+  color: #b0a18f; /* ホバー時の色 */
 }

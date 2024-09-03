@@ -1,0 +1,88 @@
+body {
+  font: 16px "Century Gothic", Futura, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url(./img/tatami.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.square {
+  position: relative;
+  background: #FFCC00;
+  border: 1px solid #999;
+  float: left;
+  height: 60px;
+  width: 60px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+}
+
+.square p {
+  margin-top: 1px;
+  color: yellow;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+#未選択.square {
+  background: rgba(0, 0, 0, .5);
+}
+
+#選択状態.square {
+  background: red;
+}
+
+#配置可能.square {
+  background: yellow;
+}
+
+#持駒.square {
+  background: darkgoldenrod;
+}
+
+img {
+  width: 50px;
+}
+
+img#後手 {
+  transform: scale(-1, -1);
+}
+
+.check-banner{
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 1px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+}

@@ -1,4 +1,4 @@
-import { Piece, Blank, King, Rook, Bishop, GoldGeneral, SilverGeneral, Knight, Lance, Pawn } from './Pieces';
+import { Piece, Blank, King, Rook, Bishop, GoldGeneral, SilverGeneral, Knight, Lance, Pawn,  PromotedPawn, PromotedLance, PromotedKnight, PromotedSilverGeneral, PromotedBishop, PromotedRook } from './Pieces';
 
 class BoardInfo {
 
@@ -51,6 +51,7 @@ class BoardInfo {
      
             // 王手状態をis_checkプロパティに設定
             this.is_check = data.is_check;
+            this.is_check2 = data.is_check2;
      
             // 詰み（チェックメイト）の場合の処理
             if (data.is_checkmate) {
@@ -216,11 +217,14 @@ class BoardInfo {
        
         await this.checkCheckmate();
 
-        if (this.is_check) {
-            alert(`王手です！ この手は指せません。`);
+        console.log(this.is_check)
+        console.log(this.is_check2)
+
+        if (this.is_check2){
             this.undoLastMove(previousState);
             return;  // メソッドを終了
         }
+        
 
         // ゲームが終了した場合、結果を表示
         if (this.isGameOver) {

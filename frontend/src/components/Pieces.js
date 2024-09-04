@@ -167,4 +167,4 @@ class PromotedPawn extends Piece {
     }
 }
 
-export { Piece, Blank, King, Rook, Bishop, GoldGeneral, SilverGeneral, Knight, Lance, Pawn};
+export { Piece, Blank, King, Rook, Bishop, GoldGeneral, SilverGeneral, Knight, Lance, Pawn,  PromotedPawn, PromotedLance, PromotedKnight, PromotedSilverGeneral, PromotedBishop, PromotedRook};

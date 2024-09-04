@@ -163,6 +163,11 @@ class Game extends React.Component {
             <h2>王手</h2>
           </div>
         )}
+        {this.state.boardInfo.is_check2 &&(
+          <div className='check-banner'>
+            <h2>自爆ですＹＯ</h2>
+          </div>
+        )}
 
 
         <div className="game-board">

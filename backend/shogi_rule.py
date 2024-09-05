@@ -16,6 +16,8 @@ def check_checkmate():
     
     # 王手かどうかをチェック
     is_check = board.is_check()
+        # 詰みかどうかをチェック
+    isGameOver = board.is_game_over()
     
     if (board.turn == 0):
         board.turn = 1
@@ -25,12 +27,12 @@ def check_checkmate():
     is_check2 = board.is_check()
     print(is_check)
     print(is_check2)
+    print(isGameOver)
     
-    # 詰みかどうかをチェック
-    is_checkmate = board.is_game_over()
+
     
     return jsonify({
-        'is_checkmate': is_checkmate,
+        'is_checkmate': isGameOver,
         'is_check' : is_check,
         'is_check2' : is_check2,
     })

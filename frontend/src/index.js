@@ -163,7 +163,7 @@ class Game extends React.Component {
             <h2>王手</h2>
           </div>
         )}
-        {this.state.boardInfo.is_check2 &&(
+        {this.state.boardInfo.is_check2 && !this.state.boardInfo.isGameOver &&(
           <div className='check-banner'>
             <h2>自爆ですＹＯ</h2>
           </div>

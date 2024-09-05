@@ -125,6 +125,7 @@ class BoardInfo {
     async boardClick(i, j) {
         // 駒を動かす前の状態を保存
         const previousState = this.saveCurrentState();
+        console.log(previousState.board);
 
         // 駒が既に選択されている状態の場合
         if (this.selection.state) {
@@ -224,7 +225,7 @@ class BoardInfo {
             this.undoLastMove(previousState);
             return;  // メソッドを終了
         }
-        
+        console.log(this.isGameOver)
 
         // ゲームが終了した場合、結果を表示
         if (this.isGameOver) {
@@ -235,19 +236,104 @@ class BoardInfo {
     // 現在の盤面状態を保存するメソッド
     saveCurrentState() {
         return {
-            board: JSON.parse(JSON.stringify(this.board)),
+            board: this.board.map(row => 
+                row.map(piece => {
+                    if (piece instanceof Blank) {
+                        return new Blank();
+                    }
+                    // 各駒タイプに応じて新しいインスタンスを作成
+                    if (piece instanceof King) return new King(piece.owner);
+                    if (piece instanceof Rook) return new Rook(piece.owner);
+                    if (piece instanceof Bishop) return new Bishop(piece.owner);
+                    if (piece instanceof GoldGeneral) return new GoldGeneral(piece.owner);
+                    if (piece instanceof SilverGeneral) return new SilverGeneral(piece.owner);
+                    if (piece instanceof Knight) return new Knight(piece.owner);
+                    if (piece instanceof Lance) return new Lance(piece.owner);
+                    if (piece instanceof Pawn) return new Pawn(piece.owner);
+                    // 成り駒の場合
+                    if (piece instanceof PromotedRook) return new PromotedRook(piece.owner);
+                    if (piece instanceof PromotedBishop) return new PromotedBishop(piece.owner);
+                    if (piece instanceof PromotedSilverGeneral) return new PromotedSilverGeneral(piece.owner);
+                    if (piece instanceof PromotedKnight) return new PromotedKnight(piece.owner);
+                    if (piece instanceof PromotedLance) return new PromotedLance(piece.owner);
+                    if (piece instanceof PromotedPawn) return new PromotedPawn(piece.owner);
+                    
+                    console.error('Unknown piece type:', piece);
+                    return new Blank(); // エラーの場合は空のマスとして扱う
+                })
+            ),
             turn: this.turn,
             pieceStandNum: JSON.parse(JSON.stringify(this.pieceStandNum)),
-            pieceStand: JSON.parse(JSON.stringify(this.pieceStand))
+            pieceStand: {
+                "先手": this.pieceStand["先手"].map(piece => {
+                    if (piece instanceof Blank) return new Blank();
+                    if (piece instanceof King) return new King(piece.owner);
+                    if (piece instanceof Rook) return new Rook(piece.owner);
+                    if (piece instanceof Bishop) return new Bishop(piece.owner);
+                    if (piece instanceof GoldGeneral) return new GoldGeneral(piece.owner);
+                    if (piece instanceof SilverGeneral) return new SilverGeneral(piece.owner);
+                    if (piece instanceof Knight) return new Knight(piece.owner);
+                    if (piece instanceof Lance) return new Lance(piece.owner);
+                    if (piece instanceof Pawn) return new Pawn(piece.owner);
+                    if (piece instanceof PromotedRook) return new PromotedRook(piece.owner);
+                    if (piece instanceof PromotedBishop) return new PromotedBishop(piece.owner);
+                    if (piece instanceof PromotedSilverGeneral) return new PromotedSilverGeneral(piece.owner);
+                    if (piece instanceof PromotedKnight) return new PromotedKnight(piece.owner);
+                    if (piece instanceof PromotedLance) return new PromotedLance(piece.owner);
+                    if (piece instanceof PromotedPawn) return new PromotedPawn(piece.owner);
+                }),
+                "後手": this.pieceStand["後手"].map(piece => {
+                    if (piece instanceof Blank) return new Blank();
+                    if (piece instanceof King) return new King(piece.owner);
+                    if (piece instanceof Rook) return new Rook(piece.owner);
+                    if (piece instanceof Bishop) return new Bishop(piece.owner);
+                    if (piece instanceof GoldGeneral) return new GoldGeneral(piece.owner);
+                    if (piece instanceof SilverGeneral) return new SilverGeneral(piece.owner);
+                    if (piece instanceof Knight) return new Knight(piece.owner);
+                    if (piece instanceof Lance) return new Lance(piece.owner);
+                    if (piece instanceof Pawn) return new Pawn(piece.owner);
+                    if (piece instanceof PromotedRook) return new PromotedRook(piece.owner);
+                    if (piece instanceof PromotedBishop) return new PromotedBishop(piece.owner);
+                    if (piece instanceof PromotedSilverGeneral) return new PromotedSilverGeneral(piece.owner);
+                    if (piece instanceof PromotedKnight) return new PromotedKnight(piece.owner);
+                    if (piece instanceof PromotedLance) return new PromotedLance(piece.owner);
+                    if (piece instanceof PromotedPawn) return new PromotedPawn(piece.owner);
+                    // 各駒タイプに応じて新しいインスタンスを作成（上記と同様）
+                    // ...
+                })
+            }
         };
     }
 
     // 最後の手を元に戻すメソッド
     undoLastMove(previousState) {
-        this.board = previousState.board;
+        const createNewPiece = (piece) => {
+            if (piece instanceof Blank) return new Blank();
+            if (piece instanceof King) return new King(piece.owner);
+            if (piece instanceof Rook) return new Rook(piece.owner);
+            if (piece instanceof Bishop) return new Bishop(piece.owner);
+            if (piece instanceof GoldGeneral) return new GoldGeneral(piece.owner);
+            if (piece instanceof SilverGeneral) return new SilverGeneral(piece.owner);
+            if (piece instanceof Knight) return new Knight(piece.owner);
+            if (piece instanceof Lance) return new Lance(piece.owner);
+            if (piece instanceof Pawn) return new Pawn(piece.owner);
+            if (piece instanceof PromotedRook) return new PromotedRook(piece.owner);
+            if (piece instanceof PromotedBishop) return new PromotedBishop(piece.owner);
+            if (piece instanceof PromotedSilverGeneral) return new PromotedSilverGeneral(piece.owner);
+            if (piece instanceof PromotedKnight) return new PromotedKnight(piece.owner);
+            if (piece instanceof PromotedLance) return new PromotedLance(piece.owner);
+            if (piece instanceof PromotedPawn) return new PromotedPawn(piece.owner);
+            console.warn('Unknown piece type:', piece);
+            return new Blank(); // 未知の駒タイプの場合は空のマスとして扱う
+        };
+    
+        this.board = previousState.board.map(row => row.map(createNewPiece));
         this.turn = previousState.turn;
-        this.pieceStandNum = previousState.pieceStandNum;
-        this.pieceStand = previousState.pieceStand;
+        this.pieceStandNum = JSON.parse(JSON.stringify(previousState.pieceStandNum));
+        this.pieceStand = {
+            "先手": previousState.pieceStand["先手"].map(createNewPiece),
+            "後手": previousState.pieceStand["後手"].map(createNewPiece)
+        };
         this.selection = new Selection();  // 選択状態をリセット
     }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import logo from "./img/huji.png";
 import imgKing from "./img/玉.png";
 import imgRook from "./img/飛.png";
 import imgBishop from "./img/角.png";
@@ -109,10 +110,16 @@ class PieceStand extends React.Component {
 }
 
 function Home({ onStartGame }) {
+
   return (
-    <div className="home">
-      <h1>将棋ゲーム</h1>
-      <button onClick={onStartGame}>対局開始</button>
+    <div className="App">
+      <header className="App-header">
+        <a>
+          ふじいくん
+        </a>
+        <img src={logo} className="App-logo" alt="logo" />
+        <button onClick={onStartGame}>対局開始</button>
+      </header>
     </div>
   );
 }
@@ -130,6 +137,12 @@ class Game extends React.Component {
     this.setState({ isGameStarted: true });
   }
 
+  returnToHome = () => {
+    const confirmReturn = window.confirm("本当にHOME画面に戻りますか？ 現在の対局状況は失われます。");
+    if (confirmReturn) {
+      this.setState({ isGameStarted: false });
+    }
+  }
 
   canselSelection() {
     const nextBoardInfo = this.state.boardInfo;
@@ -163,12 +176,17 @@ class Game extends React.Component {
         <div className="game-over">
           <h2>ゲーム終了！</h2>
           <p>{this.state.boardInfo.winner}の勝利です！</p>
+          <button onClick={this.returnToHome}>HOME画面に戻る</button>
         </div>
       );
     }
 
     return (
       <div className="game" onClick={() => this.canselSelection()}>
+        <div className="home-button-container">
+          <button onClick={this.returnToHome}>HOMEに戻る</button>
+        </div>
+
         {this.state.boardInfo.is_check &&(
           <div className='check-banner'>
             <h2>王手</h2>

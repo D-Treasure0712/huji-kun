@@ -108,13 +108,28 @@ class PieceStand extends React.Component {
   }
 }
 
+function Home({ onStartGame }) {
+  return (
+    <div className="home">
+      <h1>将棋ゲーム</h1>
+      <button onClick={onStartGame}>対局開始</button>
+    </div>
+  );
+}
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardInfo: new BoardInfo()
+      boardInfo: new BoardInfo(),
+      isGameStarted: false, // 新しく追加した状態
     };
   }
+
+  startGame = () => {
+    this.setState({ isGameStarted: true });
+  }
+
 
   canselSelection() {
     const nextBoardInfo = this.state.boardInfo;
@@ -139,13 +154,9 @@ class Game extends React.Component {
   }
 
   render() {
-    // if (this.state.boardInfo.is_check) {
-    //   return (
-    //     <div className="check">
-    //       <h2>王手</h2>
-    //     </div>
-    //   );
-    // }
+    if (!this.state.isGameStarted) {
+      return <Home onStartGame={this.startGame} />;
+    }
 
     if (this.state.boardInfo.isGameOver) {
       return (

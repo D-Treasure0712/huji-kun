@@ -109,7 +109,7 @@ class PieceStand extends React.Component {
   }
 }
 
-function Home({ onStartGame }) {
+function Home({ onStartGame, onQuit}) {
 
   return (
     <div className="App">
@@ -133,6 +133,17 @@ class Game extends React.Component {
     };
   }
 
+  resetGame = () => {
+    this.state = {
+      boardInfo: new BoardInfo(),
+      isGameStarted: false,
+    };
+    this.setState ({
+      boardInfo: new BoardInfo(),
+      isGameStarted: false,
+    });
+  }
+
   startGame = () => {
     this.setState({ isGameStarted: true });
   }
@@ -140,9 +151,10 @@ class Game extends React.Component {
   returnToHome = () => {
     const confirmReturn = window.confirm("本当にHOME画面に戻りますか？ 現在の対局状況は失われます。");
     if (confirmReturn) {
-      this.setState({ isGameStarted: false });
+      this.resetGame();
     }
   }
+
 
   canselSelection() {
     const nextBoardInfo = this.state.boardInfo;
